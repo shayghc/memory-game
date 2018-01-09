@@ -1,3 +1,3 @@
 # How to contribute
 
-The files in this repository are used as the starting point for all students. Because we want students to write the majority of the code themselves, pull requests (most likely) will _not_ be merged into the project.
+Feel free to propose better solutions for the code that I am using for the exercise either via git hub or by [email](sghconnolly@gmail.com)
