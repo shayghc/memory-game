@@ -31,6 +31,6 @@ Detailed requirements can be located in the [project rubric](https://review.udac
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+[This repository](https://github.com/udacity/fend-project-memory-game) is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
