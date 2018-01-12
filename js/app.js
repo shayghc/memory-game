@@ -10,6 +10,16 @@
  *   - add each card's HTML to the page
  */
 
+
+// Required Variables
+let moveCount = 0;
+let cardsSelectedCount = 0;
+let cardsMatchedCount = 0;
+let cardsArray = [];
+let card1 = ""; 
+let card2 = "";
+
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -38,3 +48,20 @@ function shuffle(array) {
  */
 
 
+// Add event listeners using event delegation
+for (let i = 0; i < availableCards.length; i++) {
+        availableCards[i].addEventListener('click', function respondToTheClick() {
+            if (availableCards[i].classList.value === 'card') {
+                console.log('Hidden card ' + cardsSelectedCount);
+                if (cardsSelectedCount === 0) {
+                    console.log('Passing card one');
+                    //matchCards(availableCards[i], cardsSelectedCount);		This will be the call to the card match function
+                } else if (cardsSelectedCount === 1) {
+                    console.log('Passing card two');
+                    //matchCards(availableCards[i], cardsSelectedCount);		This will be the call to the card match function
+                }
+                cardsSelectedCount++;
+            } 
+            console.log('A card was clicked.');
+        });
+}
