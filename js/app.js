@@ -11,6 +11,7 @@
  */
 
 
+// Variable declarations *************************************************************************
 // Required Variables
 let moveCount = 0;
 let cardsSelectedCount = 0;
@@ -19,6 +20,20 @@ let cardsArray = [];
 let card1 = ""; 
 let card2 = "";
 
+// Function declarations *************************************************************************
+// Function to check selected cards for a match
+function matchCards(card, count) {
+    // Change card to open state
+    card.setAttribute('class', 'card open show');
+    if (count === 0) {
+        card2 = card;
+        console.log('Ready to check card one');
+    } else if (count === 1) {
+        card2 = card;
+        console.log('Ready to check card two');
+    }
+    //Check for card matched
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -35,6 +50,30 @@ function shuffle(array) {
     return array;
 }
 
+// Programme code ********************************************************************************
+
+// Gather cards from deck for array assignment
+availableCards = document.getElementsByClassName('card');
+
+// Add event listeners using event delegation
+for (let i = 0; i < availableCards.length; i++) {
+        availableCards[i].addEventListener('click', function respondToTheClick() {
+            if (availableCards[i].classList.value === 'card') {
+                console.log('Hidden card ' + cardsSelectedCount);
+                if (cardsSelectedCount === 0) {
+                    console.log('Passing card one');
+                    matchCards(availableCards[i], cardsSelectedCount);
+                } else if (cardsSelectedCount === 1) {
+                    console.log('Passing card two');
+                    matchCards(availableCards[i], cardsSelectedCount);
+                }
+                cardsSelectedCount++;
+            } 
+            console.log('A card was clicked.');
+        });
+}
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -46,22 +85,3 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
-
-// Add event listeners using event delegation
-for (let i = 0; i < availableCards.length; i++) {
-        availableCards[i].addEventListener('click', function respondToTheClick() {
-            if (availableCards[i].classList.value === 'card') {
-                console.log('Hidden card ' + cardsSelectedCount);
-                if (cardsSelectedCount === 0) {
-                    console.log('Passing card one');
-                    //matchCards(availableCards[i], cardsSelectedCount);		This will be the call to the card match function
-                } else if (cardsSelectedCount === 1) {
-                    console.log('Passing card two');
-                    //matchCards(availableCards[i], cardsSelectedCount);		This will be the call to the card match function
-                }
-                cardsSelectedCount++;
-            } 
-            console.log('A card was clicked.');
-        });
-}
