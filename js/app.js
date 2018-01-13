@@ -14,25 +14,47 @@
 // Variable declarations *************************************************************************
 // Required Variables
 let moveCount = 0;
-let cardsSelectedCount = 0;
 let cardsMatchedCount = 0;
-let cardsArray = [];
-let card1 = ""; 
+let cardsSelectedCount = 0;
+let cardsMatchCheck = [];
+let card1Address = "";
+let card2Address = "";
+let card1 = "";
 let card2 = "";
 
 // Function declarations *************************************************************************
 // Function to check selected cards for a match
-function matchCards(card, count) {
+function matchCards(card) {
     // Change card to open state
     card.setAttribute('class', 'card open show');
-    if (count === 0) {
-        card2 = card;
-        console.log('Ready to check card one');
-    } else if (count === 1) {
-        card2 = card;
-        console.log('Ready to check card two');
+    if (cardsMatchCheck.length === 0) {
+		card1Address = card;
+        card1 = card.firstElementChild.className;
+		cardsMatchCheck[0] = card.firstElementChild.className;
+        console.log('card1 is ' + card1); // Test message for development only
+    } else if (cardsMatchCheck.length === 1) {
+		card2Address = card;
+        card2 = card.firstElementChild.className;
+		cardsMatchCheck[1] = card.firstElementChild.className;
+		
+        console.log('card2 is ' + card2); // Test message for development only
     }
     //Check for card matched
+	if (cardsMatchCheck.length === 2) {
+		if (card1 === card2) {
+			console.log('EXITO!');
+			card1Address.setAttribute('class', 'card match');
+			card2Address.setAttribute('class', 'card match'); // How do I address the original card?
+			return;
+		} else {
+			console.log('NO JODA!');
+			card1Address.setAttribute('class', 'card');
+			card2Address.setAttribute('class', 'card');
+			return;
+		}
+	}
+	//INITIALISE VARIABLES AGAIN FOR NEXT CARD MATCH CHECK
+	
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -59,18 +81,12 @@ availableCards = document.getElementsByClassName('card');
 for (let i = 0; i < availableCards.length; i++) {
         availableCards[i].addEventListener('click', function respondToTheClick() {
             if (availableCards[i].classList.value === 'card') {
-                console.log('Hidden card ' + cardsSelectedCount);
                 if (cardsSelectedCount === 0) {
-                    console.log('Passing card one');
-                    matchCards(availableCards[i], cardsSelectedCount);
-                } else if (cardsSelectedCount === 1) {
-                    console.log('Passing card two');
-                    matchCards(availableCards[i], cardsSelectedCount);
-                }
-                cardsSelectedCount++;
-            } 
-            console.log('A card was clicked.');
-        });
+                    console.log('Passing card'); // Test message for development only
+					matchCards(availableCards[i]);
+            }
+        }
+		});
 }
 
 
