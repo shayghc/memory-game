@@ -22,10 +22,13 @@ let card2Address = "";
 let card1 = "";
 let card2 = "";
 
+
 // Function declarations *************************************************************************
+
+
 // Function to check selected cards for a match
 function matchCards(card) {
-    // Change card to open state
+    // Change card to open state to show that it has been selected
     card.setAttribute('class', 'card open show');
     if (cardsMatchCheck.length === 0) {
 		card1Address = card;
@@ -36,7 +39,7 @@ function matchCards(card) {
 		card2Address = card;
         card2 = card.firstElementChild.className;
 		cardsMatchCheck[1] = card.firstElementChild.className;
-		
+
         console.log('card2 is ' + card2); // Test message for development only
     }
     //Check for card matched
@@ -45,17 +48,21 @@ function matchCards(card) {
 			console.log('EXITO!');
 			card1Address.setAttribute('class', 'card match');
 			card2Address.setAttribute('class', 'card match'); // How do I address the original card?
+			cardsMatchCheck = [];
 			return;
 		} else {
 			console.log('NO JODA!');
-			card1Address.setAttribute('class', 'card');
-			card2Address.setAttribute('class', 'card');
+			setTimeout(function() {
+				card1Address.setAttribute('class', 'card');
+				card2Address.setAttribute('class', 'card');
+			}, 1000);
+			cardsMatchCheck = [];
 			return;
 		}
 	}
-	//INITIALISE VARIABLES AGAIN FOR NEXT CARD MATCH CHECK
-	
 }
+
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -80,9 +87,11 @@ availableCards = document.getElementsByClassName('card');
 // Add event listeners using event delegation
 for (let i = 0; i < availableCards.length; i++) {
         availableCards[i].addEventListener('click', function respondToTheClick() {
+			// Check to ensure that the card has not been matched or selected already
             if (availableCards[i].classList.value === 'card') {
                 if (cardsSelectedCount === 0) {
                     console.log('Passing card'); // Test message for development only
+					// Whichever card is clicked is passed to the matchCards function
 					matchCards(availableCards[i]);
             }
         }
