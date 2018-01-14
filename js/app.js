@@ -30,32 +30,30 @@ let card2 = "";
 function matchCards(card) {
     // Change card to open state to show that it has been selected
     card.setAttribute('class', 'card open show');
+	// Assign card to index zero of the card check array
     if (cardsMatchCheck.length === 0) {
 		card1Address = card;
         card1 = card.firstElementChild.className;
 		cardsMatchCheck[0] = card.firstElementChild.className;
-        console.log('card1 is ' + card1); // Test message for development only
+	// Assign card to index one of the card match array
     } else if (cardsMatchCheck.length === 1) {
 		card2Address = card;
         card2 = card.firstElementChild.className;
 		cardsMatchCheck[1] = card.firstElementChild.className;
-
-        console.log('card2 is ' + card2); // Test message for development only
     }
     //Check for card matched
 	if (cardsMatchCheck.length === 2) {
 		if (card1 === card2) {
-			console.log('EXITO!');
 			card1Address.setAttribute('class', 'card match');
-			card2Address.setAttribute('class', 'card match'); // How do I address the original card?
+			card2Address.setAttribute('class', 'card match');
 			cardsMatchCheck = [];
 			return;
 		} else {
-			console.log('NO JODA!');
 			setTimeout(function() {
 				card1Address.setAttribute('class', 'card');
 				card2Address.setAttribute('class', 'card');
 			}, 1000);
+			// Reset the card match array for the next selected pair of cards
 			cardsMatchCheck = [];
 			return;
 		}
@@ -90,8 +88,7 @@ for (let i = 0; i < availableCards.length; i++) {
 			// Check to ensure that the card has not been matched or selected already
             if (availableCards[i].classList.value === 'card') {
                 if (cardsSelectedCount === 0) {
-                    console.log('Passing card'); // Test message for development only
-					// Whichever card is clicked is passed to the matchCards function
+					// Pass the selected card to the matchCards() function
 					matchCards(availableCards[i]);
             }
         }
