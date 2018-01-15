@@ -40,12 +40,20 @@ function matchCards(card) {
 		if (card1 === card2) {
 			card1Address.setAttribute('class', 'card match');
 			card2Address.setAttribute('class', 'card match');
+			// Reset the card match array for the next selected pair of cards
 			cardsMatchCheck = [];
 			moveCount++;
 			countDisplay.innerHTML = moveCount;
-			console.log('moveCount = ' + moveCount); // Just for dev testing
+			cardsMatchedCount += 2;
+			// Announce the win
+			if (cardsMatchedCount === 16) {
+				setTimeout(function() {
+					alert('Congratulations, you win!'); // for manual testing only *****************************************
+				}, 1000);
+			}
 			return;
 		} else {
+			// Wait for this time (1 sec) before non-matching cards are turned back over
 			setTimeout(function() {
 				card1Address.setAttribute('class', 'card');
 				card2Address.setAttribute('class', 'card');
@@ -79,33 +87,39 @@ function shuffle(array) {
 }
 
 
+function startGame (availableCards) {
+	// Initialise symbol deck
+	let symbolDeck = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'];
+	shuffle(symbolDeck);
+
+
+	// Initialise the deck
+	for (let i = 0; i < availableCards.length; i++) {
+		availableCards[i].setAttribute('class', 'card');
+		availableCards[i].firstElementChild.className = symbolDeck[i];
+	}
+
+
+	// Add event listeners to cards using event delegation
+	for (let i = 0; i < availableCards.length; i++) {
+			availableCards[i].addEventListener('click', function respondToTheClick() {
+				// Check to ensure that the card has not been matched or selected already
+				if (availableCards[i].classList.value === 'card') {
+					if (cardsSelectedCount === 0) {
+						// Pass the selected card to the matchCards() function
+						matchCards(availableCards[i]);
+				}
+			}
+			});
+	}
+}
+
 // Programme code ********************************************************************************
 
 
 // Gather cards from deck for array assignment
 availableCards = document.getElementsByClassName('card');
 
-// Initialise symbol deck
-let symbolDeck = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'];
-shuffle(symbolDeck);
 
+startGame(availableCards)
 
-// Initialise the deck
-for (let i = 0; i < availableCards.length; i++) {
-	availableCards[i].setAttribute('class', 'card');
-	availableCards[i].firstElementChild.className = symbolDeck[i];
-}
-
-
-// Add event listeners using event delegation
-for (let i = 0; i < availableCards.length; i++) {
-        availableCards[i].addEventListener('click', function respondToTheClick() {
-			// Check to ensure that the card has not been matched or selected already
-            if (availableCards[i].classList.value === 'card') {
-                if (cardsSelectedCount === 0) {
-					// Pass the selected card to the matchCards() function
-					matchCards(availableCards[i]);
-            }
-        }
-		});
-}
