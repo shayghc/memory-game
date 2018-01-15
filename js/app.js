@@ -118,6 +118,7 @@ availableCards = document.getElementsByClassName('card');
 
 startGame(availableCards);
 
+
 reset.addEventListener('click', function reset() {
 	console.log('Reset clicked');
 	moveCount = 0;
@@ -126,4 +127,5 @@ reset.addEventListener('click', function reset() {
 	for (let i = 0; i < availableCards.length; i++) {
 		availableCards[i].setAttribute('class', 'card');
 	}
+	startGame(availableCards);
 });
