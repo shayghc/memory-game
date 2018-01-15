@@ -1,13 +1,6 @@
 /*
- * Create a list that holds all of your cards
- */
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
+ * JavaScript for Memory Game project for the Udacity FEWD Nanodegree course.
+ * Author: Seamus Connolly
  */
 
 
@@ -61,21 +54,18 @@ function matchCards(card) {
 			cardsMatchCheck = [];
 			moveCount++;
 			countDisplay.innerHTML = moveCount;
-			console.log('moveCount = ' + moveCount); // Just for dev testing
+			console.log('moveCount = ' + moveCount);
 			return;
 		}
 		moveCount++;
-		console.log('moveCount = ' + moveCount); // Just for dev testing
+		console.log('moveCount = ' + moveCount);
 	}
 }
 
 
-
-/*/ Shuffle function from http://stackoverflow.com/a/2450976
+// Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
-	console.log('array.length = ' + array.length); // manual test code
-	console.log('array = ' + array.element); // Manual test code
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -87,25 +77,24 @@ function shuffle(array) {
 
     return array;
 }
-*/
 
 
 // Programme code ********************************************************************************
 
+
 // Gather cards from deck for array assignment
 availableCards = document.getElementsByClassName('card');
+
+// Initialise symbol deck
+let symbolDeck = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'];
+shuffle(symbolDeck);
+
 
 // Initialise the deck
 for (let i = 0; i < availableCards.length; i++) {
 	availableCards[i].setAttribute('class', 'card');
+	availableCards[i].firstElementChild.className = symbolDeck[i];
 }
-
-// Initialise symbol deck
-const symbolDeck = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'];
-
-
-// Shuffle the deck	// DOES NOT WORK - write an alternative !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 
 // Add event listeners using event delegation
@@ -120,10 +109,3 @@ for (let i = 0; i < availableCards.length; i++) {
         }
 		});
 }
-
-
-
-/*
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
