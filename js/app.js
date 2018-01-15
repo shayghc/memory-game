@@ -15,6 +15,7 @@ let card1Address = "";
 let card2Address = "";
 let card1 = "";
 let card2 = "";
+const reset = document.getElementById('reset');
 
 
 // Function declarations *************************************************************************
@@ -41,10 +42,10 @@ function matchCards(card) {
 			card1Address.setAttribute('class', 'card match');
 			card2Address.setAttribute('class', 'card match');
 			// Reset the card match array for the next selected pair of cards
-			cardsMatchCheck = [];
-			moveCount++;
-			countDisplay.innerHTML = moveCount;
-			cardsMatchedCount += 2;
+				cardsMatchCheck = [];
+				moveCount++;
+				countDisplay.innerHTML = moveCount;
+				cardsMatchedCount += 2;
 			// Announce the win
 			if (cardsMatchedCount === 16) {
 				setTimeout(function() {
@@ -62,11 +63,9 @@ function matchCards(card) {
 			cardsMatchCheck = [];
 			moveCount++;
 			countDisplay.innerHTML = moveCount;
-			console.log('moveCount = ' + moveCount);
 			return;
 		}
 		moveCount++;
-		console.log('moveCount = ' + moveCount);
 	}
 }
 
@@ -91,14 +90,11 @@ function startGame (availableCards) {
 	// Initialise symbol deck
 	let symbolDeck = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'];
 	shuffle(symbolDeck);
-
-
 	// Initialise the deck
 	for (let i = 0; i < availableCards.length; i++) {
 		availableCards[i].setAttribute('class', 'card');
 		availableCards[i].firstElementChild.className = symbolDeck[i];
 	}
-
 
 	// Add event listeners to cards using event delegation
 	for (let i = 0; i < availableCards.length; i++) {
@@ -110,16 +106,24 @@ function startGame (availableCards) {
 						matchCards(availableCards[i]);
 				}
 			}
-			});
+		});
 	}
 }
 
-// Programme code ********************************************************************************
 
+// Programme code ********************************************************************************
 
 // Gather cards from deck for array assignment
 availableCards = document.getElementsByClassName('card');
 
+startGame(availableCards);
 
-startGame(availableCards)
-
+reset.addEventListener('click', function reset() {
+	console.log('Reset clicked');
+	moveCount = 0;
+	countDisplay.innerHTML = 0;
+	cardsMatchedCount = 0;
+	for (let i = 0; i < availableCards.length; i++) {
+		availableCards[i].setAttribute('class', 'card');
+	}
+});
