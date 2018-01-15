@@ -14,6 +14,7 @@
 // Variable declarations *************************************************************************
 // Required Variables
 let moveCount = 0;
+let countDisplay = document.getElementById('movesCounter');
 let cardsMatchedCount = 0;
 let cardsSelectedCount = 0;
 let cardsMatchCheck = [];
@@ -47,6 +48,9 @@ function matchCards(card) {
 			card1Address.setAttribute('class', 'card match');
 			card2Address.setAttribute('class', 'card match');
 			cardsMatchCheck = [];
+			moveCount++;
+			countDisplay.innerHTML = moveCount;
+			console.log('moveCount = ' + moveCount); // Just for dev testing
 			return;
 		} else {
 			setTimeout(function() {
@@ -55,16 +59,23 @@ function matchCards(card) {
 			}, 1000);
 			// Reset the card match array for the next selected pair of cards
 			cardsMatchCheck = [];
+			moveCount++;
+			countDisplay.innerHTML = moveCount;
+			console.log('moveCount = ' + moveCount); // Just for dev testing
 			return;
 		}
+		moveCount++;
+		console.log('moveCount = ' + moveCount); // Just for dev testing
 	}
 }
 
 
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+/*/ Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
+	console.log('array.length = ' + array.length); // manual test code
+	console.log('array = ' + array.element); // Manual test code
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -76,11 +87,26 @@ function shuffle(array) {
 
     return array;
 }
+*/
+
 
 // Programme code ********************************************************************************
 
 // Gather cards from deck for array assignment
 availableCards = document.getElementsByClassName('card');
+
+// Initialise the deck
+for (let i = 0; i < availableCards.length; i++) {
+	availableCards[i].setAttribute('class', 'card');
+}
+
+// Initialise symbol deck
+const symbolDeck = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'];
+
+
+// Shuffle the deck	// DOES NOT WORK - write an alternative !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 
 // Add event listeners using event delegation
 for (let i = 0; i < availableCards.length; i++) {
@@ -98,12 +124,6 @@ for (let i = 0; i < availableCards.length; i++) {
 
 
 /*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
