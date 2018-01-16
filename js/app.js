@@ -24,7 +24,7 @@ const reset = document.getElementById('reset');
 
 // Star rating function
 function starRating(moveCount) {
-		if(moveCount === 12) {
+		if(moveCount === 14) {
 			let star = document.getElementById('star3');
 			star.className = "fa fa-star-o";
 		} else if(moveCount === 18) {
@@ -35,6 +35,13 @@ function starRating(moveCount) {
 			star.className = "fa fa-star-o";
 		}
 		return;
+}
+
+function resetStars() {
+	// Reset the rating stars to full
+	document.getElementById('star1').className = "fa fa-star";
+	document.getElementById('star2').className = "fa fa-star";
+	document.getElementById('star3').className = "fa fa-star";
 }
 
 
@@ -83,7 +90,9 @@ function matchCards(card) {
 				let sec = document.getElementById('seconds').innerHTML;
 				let min = document.getElementById('minutes').innerHTML;
 				setTimeout(function() { // From here call the time and store in a variable for display in the win confirmation modal ********************************************************
-					alert('Congratulations, you win!' + ' ' + 'Time elapsed = ' + min + ':' + sec); // for manual testing only. NEEDS TO BE BUILD FOR FINAL VERSION *****************************************
+					if(confirm('Congratulations, you win!' + ' ' + 'Time elapsed = ' + min + ':' + sec + '\nDo you wish to play again?')) {
+						startGame (availableCards);
+					} // for manual testing only. NEEDS TO BE BUILD FOR FINAL VERSION *****************************************
 				}, 1000);
 			}
 			return;
@@ -130,6 +139,8 @@ function startGame (availableCards) {
 		availableCards[i].setAttribute('class', 'card');
 		availableCards[i].firstElementChild.className = symbolDeck[i];
 	}
+	//Reset star ratings
+	resetStars();
 
 	// Add event listeners to cards using event delegation
 	for (let i = 0; i < availableCards.length; i++) {
@@ -171,9 +182,7 @@ reset.addEventListener('click', function reset() {
 		availableCards[i].setAttribute('class', 'card');
 	}
 	// Reset the rating stars to full
-	document.getElementById('star1').className = "fa fa-star";
-	document.getElementById('star2').className = "fa fa-star";
-	document.getElementById('star3').className = "fa fa-star";
+	resetStars();
 	// Function call to start the game - initialise
 	startGame(availableCards);
 });

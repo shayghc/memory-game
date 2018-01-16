@@ -10,7 +10,7 @@ At the start of the game you will be presented with a deck containing sixteen ca
 
 ### Scoring
 
-The move counter will increment by one after each pair of cards is clicked. The star rating system will decrement from three stars after 12, 18 and 24 moves. The number of moves (pairs of cards turned over) is displayed at the top of the deck.
+The move counter will increment by one after each pair of cards is clicked. The star rating system will decrement from three stars after 14, 18 and 24 moves. The number of moves (pairs of cards turned over) is displayed at the top of the deck.
 
 Elapsed time is displayed below the deck. This will commence after the first card is clicked.
 
