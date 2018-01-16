@@ -9,28 +9,26 @@
 let moveCount = 0;
 let countDisplay = document.getElementById('movesCounter');
 let cardsMatchedCount = 0;
-let cardsSelectedCount = 0;
 let cardsMatchCheck = [];
-let card1Address = "";
-let card2Address = "";
-let card1 = "";
-let card2 = "";
+let card1Address = ""; // For some reason the code will not work if I place these variables inside the matchCards function
+let card2Address = ""; // For some reason the code will not work if I place these variables inside the matchCards function
+let card1 = ""; // For some reason the code will not work if I place these variables inside the matchCards function
+let card2 = ""; // For some reason the code will not work if I place these variables inside the matchCards function
 let timer = "";
 const reset = document.getElementById('reset');
 
 
 // Function declarations *************************************************************************
 
-
 // Star rating function
 function starRating(moveCount) {
-		if(moveCount === 14) {
+		if (moveCount === 14) {
 			let star = document.getElementById('star3');
 			star.className = "fa fa-star-o";
-		} else if(moveCount === 18) {
+		} else if (moveCount === 18) {
 			let star = document.getElementById('star2');
 			star.className = "fa fa-star-o";
-		} else if(moveCount >= 24) {
+		} else if (moveCount >= 24) {
 			let star = document.getElementById('star1');
 			star.className = "fa fa-star-o";
 		}
@@ -54,18 +52,16 @@ function matchCards(card) {
 		card1Address = card;
         card1 = card.firstElementChild.className;
 		cardsMatchCheck[0] = card.firstElementChild.className;
-		// If this is the first time in then start the timer *************************************************************************
-		if(moveCount === 0) {
+		// If this is the first time in then start the timer
+		if (moveCount === 0) {
 			let sec = 0;
 			function pad ( val ) { 
 			return val > 9 ? val : "0" + val; 
 			}
-
 		timer = setInterval( function() {
 			document.getElementById('seconds').innerHTML=pad(++sec%60);
 			document.getElementById('minutes').innerHTML=pad(parseInt(sec/60,10));
 			}, 1000);
-
 		}
 	// Assign card to index one of the card match array
     } else if (cardsMatchCheck.length === 1) {
@@ -89,10 +85,11 @@ function matchCards(card) {
 				clearInterval(timer);
 				let sec = document.getElementById('seconds').innerHTML;
 				let min = document.getElementById('minutes').innerHTML;
-				setTimeout(function() { // From here call the time and store in a variable for display in the win confirmation modal ********************************************************
-					if(confirm('Congratulations, you win!' + ' ' + 'Time elapsed = ' + min + ':' + sec + '\nDo you wish to play again?')) {
+				// Call the game won modal after the time indicated by the setTimeout second parameter
+				setTimeout(function() {
+					if(confirm('Congratulations, you win!' + ' ' + 'Time elapsed = ' + min + ':' + sec + '\n\nDo you wish to play again?')) {
 						startGame (availableCards);
-					} // for manual testing only. NEEDS TO BE BUILD FOR FINAL VERSION *****************************************
+					}
 				}, 1000);
 			}
 			return;
@@ -130,9 +127,27 @@ function shuffle(array) {
 
 
 // Start of game (set up) function
-function startGame (availableCards) {
+function startGame(availableCards) {
+	let cardsSelectedCount = 0;
 	// Initialise symbol deck
-	let symbolDeck = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb', 'fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-bomb'];
+	const symbolDeck = [
+		'fa fa-anchor',
+		'fa fa-anchor',
+		'fa fa-bicycle',
+		'fa fa-bicycle',
+		'fa fa-bolt',
+		'fa fa-bolt',
+		'fa fa-bomb',
+		'fa fa-bomb',
+		'fa fa-cube',
+		'fa fa-cube',
+		'fa fa-diamond',
+		'fa fa-diamond',
+		'fa fa-leaf',
+		'fa fa-leaf',
+		'fa fa-paper-plane-o',
+		'fa fa-paper-plane-o'
+	];
 	shuffle(symbolDeck);
 	// Initialise the deck
 	for (let i = 0; i < availableCards.length; i++) {
@@ -141,6 +156,13 @@ function startGame (availableCards) {
 	}
 	//Reset star ratings
 	resetStars();
+	// Reset variables
+	moveCount = 0;
+	countDisplay.innerHTML = 0;
+	cardsMatchedCount = 0;
+	// Statement to clear timer to zero *** the seconds assignment is a bit of a hack
+	document.getElementById('seconds').innerHTML='00';
+	document.getElementById('minutes').innerHTML=0;
 
 	// Add event listeners to cards using event delegation
 	for (let i = 0; i < availableCards.length; i++) {
@@ -170,13 +192,8 @@ startGame(availableCards);
 
 // Event Listener for reset button
 reset.addEventListener('click', function reset() {
-	// Reset variables
-	moveCount = 0;
-	countDisplay.innerHTML = 0;
-	cardsMatchedCount = 0;
-	// Statement to clear timer to zero *** the seconds assignment is a bit of a hack
-	document.getElementById('seconds').innerHTML='00';
-	document.getElementById('minutes').innerHTML=0;
+
+
 	// Turn all cards face down
 	for (let i = 0; i < availableCards.length; i++) {
 		availableCards[i].setAttribute('class', 'card');
