@@ -10,10 +10,10 @@ let moveCount = 0;
 let countDisplay = document.getElementById('movesCounter');
 let cardsMatchedCount = 0;
 let cardsMatchCheck = [];
-let card1Address = ""; // For some reason the code will not work if I place these variables inside the matchCards function
-let card2Address = ""; // For some reason the code will not work if I place these variables inside the matchCards function
-let card1 = ""; // For some reason the code will not work if I place these variables inside the matchCards function
-let card2 = ""; // For some reason the code will not work if I place these variables inside the matchCards function
+let card1Address = "";
+let card2Address = "";
+let card1 = "";
+let card2 = "";
 let timer = "";
 const reset = document.getElementById('reset');
 
@@ -22,19 +22,25 @@ const reset = document.getElementById('reset');
 
 // Star rating function
 function starRating(moveCount) {
+		let star = 3;
 		if (moveCount === 14) {
 			let star = document.getElementById('star3');
 			star.className = "fa fa-star-o";
+			star = 2;
 		} else if (moveCount === 18) {
 			let star = document.getElementById('star2');
 			star.className = "fa fa-star-o";
+			star = 1;
 		} else if (moveCount >= 24) {
 			let star = document.getElementById('star1');
 			star.className = "fa fa-star-o";
+			star = 0;
 		}
-		return;
+		return star;
 }
 
+
+// Reset rating stars to game start condition
 function resetStars() {
 	// Reset the rating stars to full
 	document.getElementById('star1').className = "fa fa-star";
@@ -86,8 +92,12 @@ function matchCards(card) {
 				let sec = document.getElementById('seconds').innerHTML;
 				let min = document.getElementById('minutes').innerHTML;
 				// Call the game won modal after the time indicated by the setTimeout second parameter
+				let score = starRating(moveCount);
 				setTimeout(function() {
-					if(confirm('Congratulations, you win!' + ' ' + 'Time elapsed = ' + min + ':' + sec + '\n\nDo you wish to play again?')) {
+					if(confirm('Congratulations, you win!' +
+							   '\n\nYou completed the game in ' + moveCount +' moves in a time of ' + min + ':' + sec +
+							   '\n\nYou earned ' + score + ' stars in this game' +
+							   '\n\nDo you wish to play again?')) {
 						startGame (availableCards);
 					}
 				}, 1000);
@@ -192,8 +202,6 @@ startGame(availableCards);
 
 // Event Listener for reset button
 reset.addEventListener('click', function reset() {
-
-
 	// Turn all cards face down
 	for (let i = 0; i < availableCards.length; i++) {
 		availableCards[i].setAttribute('class', 'card');
