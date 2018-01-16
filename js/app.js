@@ -88,6 +88,7 @@ function matchCards(card) {
 			cardsMatchedCount += 2;
 			// Announce the win
 			if (cardsMatchedCount === 16) {
+				// stops the timer
 				clearInterval(timer);
 				let sec = document.getElementById('seconds').innerHTML;
 				let min = document.getElementById('minutes').innerHTML;
@@ -170,6 +171,7 @@ function startGame(availableCards) {
 	moveCount = 0;
 	countDisplay.innerHTML = 0;
 	cardsMatchedCount = 0;
+	clearInterval(timer);
 	// Statement to clear timer to zero *** the seconds assignment is a bit of a hack
 	document.getElementById('seconds').innerHTML='00';
 	document.getElementById('minutes').innerHTML=0;
