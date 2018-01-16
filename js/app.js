@@ -15,6 +15,7 @@ let card1Address = "";
 let card2Address = "";
 let card1 = "";
 let card2 = "";
+let timer = "";
 const reset = document.getElementById('reset');
 
 
@@ -23,11 +24,9 @@ const reset = document.getElementById('reset');
 
 // Star rating function
 function starRating(moveCount) {
-		console.log('In the starRating function. moveCount = ' + moveCount);
 		if(moveCount === 12) {
 			let star = document.getElementById('star3');
 			star.className = "fa fa-star-o";
-			console.log(star.className);
 		} else if(moveCount === 18) {
 			let star = document.getElementById('star2');
 			star.className = "fa fa-star-o";
@@ -48,6 +47,19 @@ function matchCards(card) {
 		card1Address = card;
         card1 = card.firstElementChild.className;
 		cardsMatchCheck[0] = card.firstElementChild.className;
+		// If this is the first time in then start the timer *************************************************************************
+		if(moveCount === 0) {
+			let sec = 0;
+			function pad ( val ) { 
+			return val > 9 ? val : "0" + val; 
+			}
+
+		timer = setInterval( function() {
+			document.getElementById('seconds').innerHTML=pad(++sec%60);
+			document.getElementById('minutes').innerHTML=pad(parseInt(sec/60,10));
+			}, 1000);
+
+		}
 	// Assign card to index one of the card match array
     } else if (cardsMatchCheck.length === 1) {
 		card2Address = card;
@@ -67,8 +79,11 @@ function matchCards(card) {
 			cardsMatchedCount += 2;
 			// Announce the win
 			if (cardsMatchedCount === 16) {
-				setTimeout(function() {
-					alert('Congratulations, you win!'); // for manual testing only. NEEDS TO BE BUILD FOR FINAL VERSION *****************************************
+				clearInterval(timer);
+				let sec = document.getElementById('seconds').innerHTML;
+				let min = document.getElementById('minutes').innerHTML;
+				setTimeout(function() { // From here call the time and store in a variable for display in the win confirmation modal ********************************************************
+					alert('Congratulations, you win!' + ' ' + 'Time elapsed = ' + min + ':' + sec); // for manual testing only. NEEDS TO BE BUILD FOR FINAL VERSION *****************************************
 				}, 1000);
 			}
 			return;
@@ -148,11 +163,14 @@ reset.addEventListener('click', function reset() {
 	moveCount = 0;
 	countDisplay.innerHTML = 0;
 	cardsMatchedCount = 0;
+	// Statement to clear timer to zero *** the seconds assignment is a bit of a hack
+	document.getElementById('seconds').innerHTML='00';
+	document.getElementById('minutes').innerHTML=0;
 	// Turn all cards face down
 	for (let i = 0; i < availableCards.length; i++) {
 		availableCards[i].setAttribute('class', 'card');
 	}
-	// Rest the rating stars to full
+	// Reset the rating stars to full
 	document.getElementById('star1').className = "fa fa-star";
 	document.getElementById('star2').className = "fa fa-star";
 	document.getElementById('star3').className = "fa fa-star";
