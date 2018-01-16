@@ -2,13 +2,6 @@
 
 This is a project to apply JavaScript learned in section two of the FEWD Nanodegree course, "Web Programming with JavaScript".
 
-## Table of Contents
-
-* [Game Play](#game_play)
-* [Instructions](#instructions)
-* [Development Strategy](#development_strategy)
-* [Contributing](#contributing)
-
 ## Game Play
 
 ### How to play
