@@ -1,6 +1,13 @@
 /*
  * JavaScript for Memory Game project for the Udacity FEWD Nanodegree course.
  * Author: Seamus Connolly
+ *
+ * TODO:
+ * Bugs: I still need to work on code to prevent rapid selection of multiple tiles which will currently break the code.
+ * Comment: I am sure that the code is unnecessarily verbose.
+ *			I shall return at a later date once I have learned more JS in order to refactor the code.
+ * 			I have avoided use of jQuery in response to the course content that jQuery is becoming less relevant as JS improves.
+ *
  */
 
 
@@ -20,9 +27,11 @@ const reset = document.getElementById('reset');
 
 // Function declarations *************************************************************************
 
+
 // Star rating function
 function starRating(moveCount) {
-		let star = 3;
+		let star;
+
 		if (moveCount === 14) {
 			let star = document.getElementById('star3');
 			star.className = "fa fa-star-o";
@@ -75,6 +84,8 @@ function matchCards(card) {
         card2 = card.firstElementChild.className;
 		cardsMatchCheck[1] = card.firstElementChild.className;
     }
+
+
     //Check for card matched
 	if (cardsMatchCheck.length === 2) {
 		if (card1 === card2) {
@@ -86,6 +97,8 @@ function matchCards(card) {
 			starRating(moveCount);
 			countDisplay.innerHTML = moveCount;
 			cardsMatchedCount += 2;
+
+
 			// Announce the win
 			if (cardsMatchedCount === 16) {
 				// stops the timer
@@ -93,6 +106,7 @@ function matchCards(card) {
 				let sec = document.getElementById('seconds').innerHTML;
 				let min = document.getElementById('minutes').innerHTML;
 				// Get correct score for game won message
+
 				let score = 3;
 				if (moveCount >= 14 && moveCount < 18) {
 					score = 2;
@@ -101,6 +115,8 @@ function matchCards(card) {
 				} else {
 					score = 0;
 				}
+
+
 				// Call the game won modal after the time indicated by the setTimeout second parameter
 				setTimeout(function() {
 					if(confirm('Congratulations, you win!' +
@@ -130,7 +146,7 @@ function matchCards(card) {
 }
 
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+// Shuffle function from http://stackoverflow.com/a/2450976 - supplied in starter code
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
