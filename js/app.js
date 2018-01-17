@@ -92,8 +92,16 @@ function matchCards(card) {
 				clearInterval(timer);
 				let sec = document.getElementById('seconds').innerHTML;
 				let min = document.getElementById('minutes').innerHTML;
+				// Get correct score for game won message
+				let score = 3;
+				if (moveCount >= 14 && moveCount < 18) {
+					score = 2;
+				} else if (moveCount >=18 && moveCount <24) {
+					score = 1;
+				} else {
+					score = 0;
+				}
 				// Call the game won modal after the time indicated by the setTimeout second parameter
-				let score = starRating(moveCount);
 				setTimeout(function() {
 					if(confirm('Congratulations, you win!' +
 							   '\n\nYou completed the game in ' + moveCount +' moves in a time of ' + min + ':' + sec +
