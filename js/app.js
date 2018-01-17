@@ -23,6 +23,9 @@ let card1 = "";
 let card2 = "";
 let timer = "";
 const reset = document.getElementById('reset');
+// Change the value of the following two variables to set the star score points
+const highScoreLimit = 14; // Changes from three to two stars
+const lowScoreLimit = 18; // Changes from two stars to one star
 
 
 // Function declarations *************************************************************************
@@ -31,11 +34,11 @@ const reset = document.getElementById('reset');
 // Star rating function
 function starRating(moveCount) {
 		let star;
-		if (moveCount === 14) {
+		if (moveCount === highScoreLimit) {
 			let star = document.getElementById('star3');
 			star.className = "fa fa-star-o";
 			star = 2;
-		} else if (moveCount === 18) {
+		} else if (moveCount === lowScoreLimit) {
 			let star = document.getElementById('star2');
 			star.className = "fa fa-star-o";
 			star = 1;
@@ -103,9 +106,9 @@ function matchCards(card) {
 				// Get correct score for game won message
 
 				let score = 3;
-				if (moveCount >= 14 && moveCount < 18) {
+				if (moveCount >= highScoreLimit && moveCount < lowScoreLimit) {
 					score = 2;
-				} else if (moveCount >=18) {
+				} else if (moveCount >= lowScoreLimit) {
 					score = 1;
 				}
 
