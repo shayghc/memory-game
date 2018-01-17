@@ -31,7 +31,6 @@ const reset = document.getElementById('reset');
 // Star rating function
 function starRating(moveCount) {
 		let star;
-
 		if (moveCount === 14) {
 			let star = document.getElementById('star3');
 			star.className = "fa fa-star-o";
@@ -40,10 +39,6 @@ function starRating(moveCount) {
 			let star = document.getElementById('star2');
 			star.className = "fa fa-star-o";
 			star = 1;
-		} else if (moveCount >= 24) {
-			let star = document.getElementById('star1');
-			star.className = "fa fa-star-o";
-			star = 0;
 		}
 		return star;
 }
@@ -110,10 +105,8 @@ function matchCards(card) {
 				let score = 3;
 				if (moveCount >= 14 && moveCount < 18) {
 					score = 2;
-				} else if (moveCount >=18 && moveCount <24) {
+				} else if (moveCount >=18) {
 					score = 1;
-				} else {
-					score = 0;
 				}
 
 
