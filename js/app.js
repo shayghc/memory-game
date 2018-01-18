@@ -23,6 +23,9 @@ let card1 = "";
 let card2 = "";
 let timer = "";
 const reset = document.getElementById('reset');
+// Two variables to set the moveCount where the star rating will decrement
+const twoStars = 14;
+const oneStar = 18;
 
 
 // Function declarations *************************************************************************
@@ -31,19 +34,14 @@ const reset = document.getElementById('reset');
 // Star rating function
 function starRating(moveCount) {
 		let star;
-
-		if (moveCount === 14) {
+		if (moveCount === twoStars) {
 			let star = document.getElementById('star3');
 			star.className = "fa fa-star-o";
 			star = 2;
-		} else if (moveCount === 18) {
+		} else if (moveCount === oneStar) {
 			let star = document.getElementById('star2');
 			star.className = "fa fa-star-o";
 			star = 1;
-		} else if (moveCount >= 24) {
-			let star = document.getElementById('star1');
-			star.className = "fa fa-star-o";
-			star = 0;
 		}
 		return star;
 }
@@ -106,22 +104,25 @@ function matchCards(card) {
 				let sec = document.getElementById('seconds').innerHTML;
 				let min = document.getElementById('minutes').innerHTML;
 				// Get correct score for game won message
-
 				let score = 3;
-				if (moveCount >= 14 && moveCount < 18) {
+				if (moveCount >= twoStars && moveCount < oneStar) {
 					score = 2;
-				} else if (moveCount >=18 && moveCount <24) {
+				} else if (moveCount >=oneStar) {
 					score = 1;
-				} else {
-					score = 0;
 				}
 
 
 				// Call the game won modal after the time indicated by the setTimeout second parameter
+				let nounType;
+				if (score > 1) {
+					nounType = 'stars';
+				} else {
+					nounType = 'star';
+				}
 				setTimeout(function() {
 					if(confirm('Congratulations, you win!' +
 							   '\n\nYou completed the game in ' + moveCount +' moves in a time of ' + min + ':' + sec +
-							   '\n\nYou earned ' + score + ' stars in this game' +
+							   '\n\nYou earned ' + score + ' ' + nounType + ' in this game' +
 							   '\n\nDo you wish to play again?')) {
 						startGame (availableCards);
 					}
