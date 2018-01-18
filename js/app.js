@@ -28,6 +28,7 @@ const twoStars = 14;
 const oneStar = 18;
 
 
+
 // Function declarations *************************************************************************
 
 
