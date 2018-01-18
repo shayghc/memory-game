@@ -1,6 +1,6 @@
 /*
- * JavaScript for Memory Game project for the Udacity FEWD Nanodegree course.
- * Author: Seamus Connolly
+ * @fileOverview JavaScript for Memory Game project for the Udacity FEWD Nanodegree course.
+ * @author <a href+"mailto:sghconnolly@gmail.com">Seamus Connolly</a>
  *
  * TODO:
  * Bugs: I still need to work on code to prevent rapid selection of multiple tiles which will currently break the code.
@@ -11,8 +11,8 @@
  */
 
 
-// Variable declarations *************************************************************************
-// Required Variables
+/** Variable declarations *************************************************************************/
+/** Required Variables */
 let moveCount = 0;
 let countDisplay = document.getElementById('movesCounter');
 let cardsMatchedCount = 0;
@@ -29,10 +29,13 @@ const oneStar = 18;
 
 
 
-// Function declarations *************************************************************************
+/** Function declarations *************************************************************************/
 
 
-// Star rating function
+/** Star rating function
+ * @param {number} moveCount This parameter contains the current movecount of turns taken by the player at that time
+ * @return {number} This parameter will return the appropriate score (star rating) to the matchCards() function
+ */
 function starRating(moveCount) {
 		let star;
 		if (moveCount === twoStars) {
