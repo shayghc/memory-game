@@ -11,7 +11,7 @@
  */
 
 
-/** Variable declarations *************************************************************************/
+/* Variable declarations *************************************************************************/
 /** Required Variables */
 let moveCount = 0;
 let countDisplay = document.getElementById('movesCounter');
@@ -29,10 +29,10 @@ const oneStar = 18;
 
 
 
-/** Function declarations *************************************************************************/
-
-
+/* Function declarations *************************************************************************/
 /** Star rating function
+ * @function [starRating]
+ * @description Function to evaluate the number of stars to be awarded at the end of the game
  * @param {number} moveCount This parameter contains the current movecount of turns taken by the player at that time
  * @return {number} This parameter will return the appropriate score (star rating) to the matchCards() function
  */
@@ -51,7 +51,12 @@ function starRating(moveCount) {
 }
 
 
-// Reset rating stars to game start condition
+/**
+ * @function [resetStars]
+ * @description Resets stars rating to game start condition
+ * @param '' This function accepts no parameters
+ * @return No value is returned, the return simply passes back flow control
+ */
 function resetStars() {
 	// Reset the rating stars to full
 	document.getElementById('star1').className = "fa fa-star";
@@ -60,7 +65,12 @@ function resetStars() {
 }
 
 
-// Function to check selected cards for a match
+/**
+ * @function [matchCards]
+ * @description Function to check selected pair of cards for a matched
+ * @param {object} card This parameter passes in the user selected card from the availableCards array
+ * @return No value is returned, the return simply passes back flow control
+ */
 function matchCards(card) {
     // Change card to open state to show that it has been selected
     card.setAttribute('class', 'card open show');
@@ -72,8 +82,8 @@ function matchCards(card) {
 		// If this is the first time in then start the timer
 		if (moveCount === 0) {
 			let sec = 0;
-			function pad ( val ) { 
-			return val > 9 ? val : "0" + val; 
+			function pad ( val ) {
+			return val > 9 ? val : "0" + val;
 			}
 		timer = setInterval( function() {
 			document.getElementById('seconds').innerHTML=pad(++sec%60);
@@ -151,7 +161,12 @@ function matchCards(card) {
 }
 
 
-// Shuffle function from http://stackoverflow.com/a/2450976 - supplied in starter code
+/**
+* @function [shuffle]
+* @description This function provides a random shuffle of the cards symbols array. Shuffle function from http://stackoverflow.com/a/2450976 - supplied in starter code from Udacity GitHub site
+* @param {object} array This is an array object passed from the startGame() function
+* @return The shuffled symbol array is returned to the startGame() function
+*/
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -166,7 +181,12 @@ function shuffle(array) {
 }
 
 
-// Start of game (set up) function
+/**
+ * @function [startGame]
+ * @description Start of game (set up) function will shuffle deck and initialise game variables
+ * @param {object} availableCards The parameter receives an array object containing an HTMLCollection
+ * @return This function does not return a temporaryValue
+ */
 function startGame(availableCards) {
 	let cardsSelectedCount = 0;
 	// Initialise symbol deck
