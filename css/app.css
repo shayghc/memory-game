@@ -17,7 +17,7 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/cheap_diagonal_fabric.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -40,7 +40,7 @@ h1 {
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: linear-gradient(160deg, #33c 25%, #9f0 100%);
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -57,6 +57,7 @@ h1 {
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
+    border: solid 1px #555;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -89,6 +90,10 @@ h1 {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
+    color: gold;
+    background-color: slategrey;
+    padding: 0 10px;
+    border-radius: 5px;
 }
 
 .score-panel .stars {
@@ -96,6 +101,7 @@ h1 {
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
+    color: gold;
 }
 
 .score-panel .stars li {
