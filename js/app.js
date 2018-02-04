@@ -11,7 +11,7 @@
  */
 
 
-/** Variable declarations *************************************************************************/
+/* Variable declarations *************************************************************************/
 /** Required Variables */
 let moveCount = 0;
 let countDisplay = document.getElementById('movesCounter');
@@ -28,13 +28,12 @@ const twoStars = 14;
 const oneStar = 18;
 
 
-
-/** Function declarations *************************************************************************/
-
+/* Function declarations *************************************************************************/
 
 /** Star rating function
  * @function [starRating]
  * @description This function will evaluate the number of stars to be displayed at end of game
+
  * @param {number} moveCount This parameter contains the current movecount of turns taken by the player at that time
  * @return {number} This parameter will return the appropriate score (star rating) to the matchCards() function
  */
@@ -53,11 +52,12 @@ function starRating(moveCount) {
 }
 
 
+
 /**
  * @function [resetStars]
- * @description Resets rating stars to game start condition
- * @param This function accepts no parameters
- * @return There is no return from this function
+ * @description Resets stars rating to game start condition
+ * @param '' This function accepts no parameters
+ * @return No value is returned, the return simply passes back flow control
  */
 function resetStars() {
 	// Reset the rating stars to full
@@ -65,7 +65,6 @@ function resetStars() {
 	document.getElementById('star2').className = "fa fa-star";
 	document.getElementById('star3').className = "fa fa-star";
 }
-
 
 /**
  * @function [matchCards]
@@ -84,7 +83,7 @@ function matchCards(card) {
 		// If this is the first time in then start the timer
 		if (moveCount === 0) {
 			let sec = 0;
-			function pad ( val ) {
+			function pad( val ) {
 			return val > 9 ? val : "0" + val;
 			}
 		timer = setInterval( function() {
@@ -164,11 +163,11 @@ function matchCards(card) {
 
 
 /**
- * @function [shuffle]
- * @description This function provides a random shuffle of the cards symbols array. Shuffle function from http://stackoverflow.com/a/2450976 - supplied in starter code from Udacity GitHub site
- * @param {object} The parameter is an array object passed from the startGame() function
- * @return The shuffled symbol array is returned to the startGame() function
- */
+* @function [shuffle]
+* @description This function provides a random shuffle of the cards symbols array. Shuffle function from http://stackoverflow.com/a/2450976 - supplied in starter code from Udacity GitHub site
+* @param {object} array This is an array object passed from the startGame() function
+* @return The shuffled symbol array is returned to the startGame() function
+*/
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -182,12 +181,11 @@ function shuffle(array) {
     return array;
 }
 
-
 /**
  * @function [startGame]
- * @description Start of game (set up) function will shuffle deck and initialise game Variables
- * @param {object} The received parameter is an array object containing an HTMLCollection
- * @return This function does not return a value
+ * @description Start of game (set up) function will shuffle deck and initialise game variables
+ * @param {object} availableCards The parameter receives an array object containing an HTMLCollection
+ * @return This function does not return a temporaryValue
  */
 function startGame(availableCards) {
 	let cardsSelectedCount = 0;
@@ -229,12 +227,12 @@ function startGame(availableCards) {
 
 	// Add event listeners to cards using event delegation
 	for (let i = 0; i < availableCards.length; i++) {
-			availableCards[i].addEventListener('click', function respondToTheClick() {
-				// Check to ensure that the card has not been matched or selected already
-				if (availableCards[i].classList.value === 'card') {
-					if (cardsSelectedCount === 0) {
-						// Pass the selected card to the matchCards() function
-						matchCards(availableCards[i]);
+		availableCards[i].addEventListener('click', function respondToTheClick() {
+			// Check to ensure that the card has not been matched or selected already
+			if (availableCards[i].classList.value === 'card') {
+				if (cardsSelectedCount === 0) {
+					// Pass the selected card to the matchCards() function
+					matchCards(availableCards[i]);
 				}
 			}
 		});

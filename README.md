@@ -20,7 +20,7 @@ The game is won by matching all cards in the deck.
 
 This can be initiated by clicking 'OK' in the game won message pop-up or alternatively by clicking on the restart symbol above the deck.
 
-## Project Instructions For Development of the Matching Game
+## Original Project Instructions For Development of the Matching Game
 
 The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
 
