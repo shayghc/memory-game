@@ -90,7 +90,7 @@ h1 {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
-    color: gold;
+    color: orange;
     background-color: slategrey;
     padding: 0 10px;
     border-radius: 5px;
@@ -101,7 +101,7 @@ h1 {
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
-    color: gold;
+    color: orange;
 }
 
 .score-panel .stars li {
@@ -118,13 +118,5 @@ h1 {
  * Style for the elapsed game time display
  */
 .timer {
-<<<<<<< HEAD
 	font-weight: bolder;
 }
-||||||| merged common ancestors
-	font-weight: bolder;
-}
-=======
-              font-weight: bolder;
-}
->>>>>>> e19be14e6c25662a6e6c46bb814e2ba265a69e8a
