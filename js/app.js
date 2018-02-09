@@ -3,7 +3,7 @@
  * @author <a href+"mailto:sghconnolly@gmail.com">Seamus Connolly</a>
  *
  * TODO:
- * Bugs: I still need to work on code to prevent rapid selection of multiple tiles which will currently break the code.
+ * Bugs: I still need code to prevent rapid selection of multiple tiles which will currently break the code.
  * Comment: I am sure that the code is unnecessarily verbose.
  * I shall return at a later date once I have learned more JS in order to refactor the code.
  * I have avoided use of jQuery in response to the course content that jQuery is becoming less relevant as JS improves.
@@ -135,10 +135,10 @@ function matchCards(card) {
                              nounType = 'star';
                 }
                 setTimeout(function() {
-                    if(confirm('Congratulations, you win!' +
-                            '\n\nYou completed the game in ' + moveCount +' moves in a time of ' + min + ':' + sec +
-                            '\n\nYou earned ' + score + ' ' + nounType + ' in this game' +
-                            '\n\nDo you wish to play again?')) {
+                    if(confirm(`Congratulations, you win!
+                        \n\nYou completed the game in ${moveCount} moves in a time of ${min}:${sec}
+                        \n\nYou earned ${score} ${nounType} in this game
+                        \n\nDo you wish to play again?`)) {
                         startGame (availableCards);
                     }
                 }, 1000);
